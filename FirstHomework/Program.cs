@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace FirstHomework
@@ -12,19 +12,18 @@ namespace FirstHomework
 
             while (true)
             {
-                byte operation = Choose();
+                int operation = Choose();
                 double firstNumber = 0, secondNumber = 0;
 
-                if (operation >= 1 && operation <= 4 || operation == 6)
-                {
-                    StandartInput(ref firstNumber, ref secondNumber);
-                }
-                else if (operation == 5)
+                if (operation == 5)
                 {
                     Console.WriteLine("Введіть число:");
                     firstNumber = Input();
                 }
-
+                else
+                {
+                    StandartInput(ref firstNumber, ref secondNumber);
+                }
                 switch (operation)
                 {
                     case 1:
@@ -64,6 +63,7 @@ namespace FirstHomework
                         Problem();
                         continue;
                 }
+
             }
         }
 
@@ -74,7 +74,7 @@ namespace FirstHomework
             Console.WriteLine("Введіть друге число:");
             secondNumber = Input();
         }
-
+        
         static double Input()
         {
 
@@ -91,16 +91,26 @@ namespace FirstHomework
             }
         }
 
-        static byte Choose()
+        static int Choose()
         {
-            Console.WriteLine("Виберіть дію:\n1 - додавання \n2 - віднімання\n3 - множення\n4 - ділення \n5 - корінь квадратний\n6 - піднесення до степеня");
-            string input = Console.ReadLine();
-            if(int.Parse(input) >=6 && int.Parse(input) <= 1)
+            while (true)
             {
+                try
+                {
+                    Console.WriteLine("Виберіть дію:\n1 - додавання \n2 - віднімання\n3 - множення\n4 - ділення \n5 - корінь квадратний\n6 - піднесення до степеня");
+                    string operate = Console.ReadLine();
+                    if (int.Parse(operate) <= 6 && int.Parse(operate) >= 1)
+                    {
+                        return int.Parse(operate);
+                    }
+                    Problem();
+                        return Choose();
+                }
+                catch (FormatException)
+                {
                 Problem();
-                return Choose();
+                }
             }
-            return byte.Parse(input);
         }
 
         static void Result(double n)
@@ -110,8 +120,7 @@ namespace FirstHomework
 
         static void Problem()
         {
-            Console.WriteLine("Помилка! Спробуйте ще раз.");
-            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Помилка! Введіть число.");
         }
     }
 }
