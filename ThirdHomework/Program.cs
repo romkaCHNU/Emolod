@@ -56,7 +56,7 @@ namespace ThirdHomework
             }
         }
         static void Tariff(double n, double number) {
-            Console.WriteLine($"За тарифом {n} грн/кВт·год ціна складає: {number * n} ");
+            Console.WriteLine($"За тарифом {n} грн/кВт·год ціна складає: {number * n} грн");
         }
     }
 }
